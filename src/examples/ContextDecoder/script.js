@@ -106,7 +106,7 @@ async function compute () {
       'RH_IN:DisplayAnalysis': displayanalysis_checkbox.checked,
 
 
-      'Point': points,
+      'Point': points
     }
   }
 
