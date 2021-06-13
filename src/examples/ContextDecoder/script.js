@@ -116,7 +116,7 @@ async function compute() {
 
             'RH_IN:DisplayAnalysis': displayanalysis_checkbox.checked,
 
-
+            'RH_OUT:Attractivity': attractivity_score.valueAsNumber,
             'points': points
         }
     }
