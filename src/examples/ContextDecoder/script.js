@@ -9,7 +9,7 @@ import rhino3dm from 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/rhino3dm
 const loader = new Rhino3dmLoader()
 loader.setLibraryPath('https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/')
 
-const definition = 'FinalInterface.gh'
+const definition = 'FinalInterface_final.gh'
 
 // setup input change events
 const amenities_slider = document.getElementById('RH_IN:SelectAmenities')
@@ -25,6 +25,9 @@ radius_slider.addEventListener('touchend', onSliderChange, false)
 
 const displayanalysis_checkbox = document.querySelector('input[id="RH_IN:DisplayAnalysis"]');
 displayanalysis_checkbox.addEventListener('change', onSliderChange, false)
+
+//setup output events
+const attractivity = document.getElementById('RH_OUT:Attractivity')
 
 let points = []
 
@@ -71,8 +74,6 @@ function onChange() {
     if (!dragging) {
         // update points position
         points = []
-        sitePoint = []
-        roadPoint = []
         scene.traverse(child => {
             if (child.name === 'ico') {
                 const pt = "{\"X\":" + child.position.x + ",\"Y\":" + child.position.y + ",\"Z\":" + child.position.z + "}"
@@ -168,6 +169,7 @@ function collectResults(responseJson) {
         }
     }
 
+
     if (doc.objects().count < 1) {
         console.error('No rhino objects to load!')
         showSpinner(false)
@@ -260,9 +262,9 @@ function init() {
     scene = new THREE.Scene()
     scene.background = new THREE.Color("rgb(0, 0, 0)")
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000)
-    camera.position.x = 100
-    camera.position.y = 100
-    camera.position.z = 50
+    camera.position.x = 1000
+    camera.position.y = 1000
+    camera.position.z = 500
 
     renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setPixelRatio(window.devicePixelRatio)
@@ -276,6 +278,10 @@ function init() {
     const directionalLight = new THREE.DirectionalLight(0xffffff)
     directionalLight.intensity = 2
     scene.add(directionalLight)
+
+    const directionalLight_ = new THREE.DirectionalLight(0xffffff)
+    directionalLight_.intensity = 200
+    scene.add(directionalLight_)
 
     const ambientLight = new THREE.AmbientLight()
     scene.add(ambientLight)
