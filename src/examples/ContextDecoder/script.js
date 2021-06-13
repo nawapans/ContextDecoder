@@ -39,9 +39,18 @@ rhino3dm().then(async m => {
 
     init()
     rndPts()
+    loadContext()
     compute()
 })
 
+function loadContext() {
+    loader.load('citynaples.3dm', function(object) {
+        object.traverse(child => {
+            child.name = 'citynaples'
+        })
+        scene.add(object)
+    })
+}
 
 function rndPts() {
     // generate random points
